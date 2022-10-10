@@ -1,6 +1,7 @@
 import { IRecipe } from './../models/recipe.interface';
 import { Injectable } from '@angular/core';
 import { v4 } from 'uuid'; 
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -31,6 +32,8 @@ export class RecipeService {
             title: "Dummy Recipe 2"
         }
     ];
+
+    public recipes$ = new BehaviorSubject<IRecipe[]>(this.recipes);
     
     constructor() { }
     
@@ -47,11 +50,13 @@ export class RecipeService {
     public add(recipe: IRecipe): void
     {
         this.recipes.push({ ...recipe, id: v4() });
+        this.recipes$.next(this.recipes);
     }
     
     public remove(recipe: IRecipe): void
     {
         this.recipes = this.recipes.filter((_recipe) => _recipe.id != recipe.id);
+        this.recipes$.next(this.recipes);
     }
     
     public update(recipe: IRecipe): void
@@ -61,15 +66,11 @@ export class RecipeService {
         {
             this.recipes[index] = recipe;
         }
+        this.recipes$.next(this.recipes);
     }
 
     public toggleFavourite(recipe: IRecipe): void
     {
-        // let recipeToToggle = this.recipes.find((_recipe) => _recipe.id == recipeId);
-        // if (recipeToToggle)
-        // {
-        //     this.update({ ...recipeToToggle, favourite: !recipeToToggle.favourite });
-        // }
         this.update({ ...recipe, favourite: !recipe.favourite });
     }
 }

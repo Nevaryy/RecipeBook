@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { combineLatest, map, take } from 'rxjs';
 import { IRecipe } from 'src/models/recipe.interface';
 import { RecipeService } from 'src/services/recipe.service';
 
@@ -16,7 +16,19 @@ export class DetailPageComponent implements OnInit {
         public recipeService: RecipeService,
         private activatedRoute: ActivatedRoute,
         private router: Router
-        ) { }
+    ) { }
+
+    public recipe$ = combineLatest([
+        this.activatedRoute.paramMap,
+        this.recipeService.recipes$
+    ]).pipe(
+        map(
+            ([paramMap, recipes]) =>
+            {
+                return recipes.filter((_recipe) => _recipe.id == paramMap.get("recipeId"))[0];
+           }     
+        )
+    );
         
     ngOnInit(): void {
         this.activatedRoute.paramMap

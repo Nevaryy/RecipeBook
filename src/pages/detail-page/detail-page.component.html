@@ -7,7 +7,8 @@
                 </button>
                 <h1>Detail</h1>
                 <button mat-icon-button (click)="this.recipeService.toggleFavourite(recipe)">
-                    <mat-icon>{{ (recipe.favourite) ? "star" : "star_border" }}</mat-icon>
+                    <!-- <mat-icon>{{ (recipe.favourite) ? "star" : "star_border" }}</mat-icon> -->
+                    <mat-icon>{{ (this.recipe$ | async).favourite ? "star" : "star_border" }}</mat-icon>
                 </button>
             </div>
             <h2>{{ recipe.title }}</h2>
