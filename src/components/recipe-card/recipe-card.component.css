@@ -1,0 +1,11 @@
+.truncat {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1em;
+    width: 200px;
+}
+
+:host() {
+    max-width: 50%;
+}

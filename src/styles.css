@@ -1,4 +1,9 @@
-html, body, app-root { 
+html,
+body,
+app-root,
+app-home-page,
+app-recipe-page,
+app-detail-page { 
     height: 100%;
     width: 100%;
 }
@@ -11,4 +16,8 @@ body {
 mat-card {
     max-width: 80% !important;
     width: 80%;    
+}
+
+.container {
+    padding: 5%;
 }

@@ -49,9 +49,9 @@ export class RecipeService {
         this.recipes.push(recipe);
     }
     
-    public remove(recipeId: string): void
+    public remove(recipe: IRecipe): void
     {
-        this.recipes = this.recipes.filter((recipe) => recipe.id != recipeId);
+        this.recipes = this.recipes.filter((_recipe) => _recipe.id != recipe.id);
     }
     
     public update(recipe: IRecipe): void

@@ -27,7 +27,7 @@ export class RecipePageComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private recipeService: RecipeService,
-        private router: Router
+        private router: Router,
     ) { }
 
     ngOnInit(): void {
@@ -43,13 +43,6 @@ export class RecipePageComponent implements OnInit {
                         this.recipe = recipe;
                         this.writeToFormGroup(recipe);
                     }
-                    // this.recipe = {
-                    //     title: "",
-                    //     createAt: new Date(),
-                    //     description: "",
-                    //     favourite: false,
-                    //     ingredient: []
-                    // };
                 }
             );
     }

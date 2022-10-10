@@ -1,11 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-    <div fxLayout="column" style="width: fit-content;">
-        <h1>Home</h1>
-        <div fxLayout="row" fxLayoutAlign="end center">
+<div fxLayout="column" fxLayoutAlign="start center" class="container">
+    <div fxLayout="column" class="container" style="width: 100%" fxLayoutGap="16px">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h1>Home</h1>
             <button mat-raised-button color="primary" routerLink="0/edit">
                 erstellen
                 <mat-icon>add</mat-icon>
             </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
         </div>
         <div fxLayout="column" fxLayoutGap="16px" *ngIf="this.recipeService.getAll() as recipes">
             <app-recipe-card *ngFor="let recipe of recipes" [recipeId]="recipe.id"></app-recipe-card>
