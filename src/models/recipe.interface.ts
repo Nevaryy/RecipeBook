@@ -3,6 +3,6 @@ export interface IRecipe {
     title: string;
     ingredient: string[];
     description: string;
-    favorite: boolean;
+    favourite: boolean;
     createAt: Date;
 }

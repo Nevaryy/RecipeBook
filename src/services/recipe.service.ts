@@ -13,7 +13,7 @@ export class RecipeService {
             id: v4(),
             createAt: new Date(),
             description: "Dummy Description 1",
-            favorite: false,
+            favourite: false,
             ingredient: [],
             title: "Dummy Recipe 1"
         },
@@ -21,10 +21,50 @@ export class RecipeService {
             id: v4(),
             createAt: new Date(),
             description: "Dummy Description 2",
-            favorite: false,
+            favourite: true,
             ingredient: [],
             title: "Dummy Recipe 2"
         }
     ];
+    
     constructor() { }
+    
+    public getAll(): IRecipe[]
+    {
+        return this.recipes;
+    }
+    
+    public get(recipeId: string): IRecipe | null
+    {
+        return this.recipes.find((recipe) => recipe.id == recipeId) ?? null;
+    }
+    
+    public add(recipe: IRecipe): void
+    {
+        this.recipes.push(recipe);
+    }
+    
+    public remove(recipeId: string): void
+    {
+        this.recipes = this.recipes.filter((recipe) => recipe.id != recipeId);
+    }
+    
+    public update(recipe: IRecipe): void
+    {
+        let index = this.recipes.findIndex((_recipe) => _recipe.id == recipe.id);
+        if (index != -1)
+        {
+            this.recipes[index] = recipe;
+        }
+    }
+
+    public toggleFavourite(recipe: IRecipe): void
+    {
+        // let recipeToToggle = this.recipes.find((_recipe) => _recipe.id == recipeId);
+        // if (recipeToToggle)
+        // {
+        //     this.update({ ...recipeToToggle, favourite: !recipeToToggle.favourite });
+        // }
+        this.update({ ...recipe, favourite: !recipe.favourite });
+    }
 }

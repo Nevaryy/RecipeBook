@@ -1,3 +1,5 @@
+import { IRecipe } from './../../models/recipe.interface';
+import { RecipeService } from './../../services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+    public recipes: IRecipe[] = this.recipeService.getAll();
     
-    constructor() { }
+    constructor(
+        public recipeService: RecipeService
+    ) { }
 }
