@@ -1,8 +1,8 @@
 export interface IRecipe {
-    id: string;
+    id?: string;
     title: string;
     ingredient: string[];
     description: string;
     favourite: boolean;
-    createAt: Date;
+    createAt?: Date;
 }

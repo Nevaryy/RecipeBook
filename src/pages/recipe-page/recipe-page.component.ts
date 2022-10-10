@@ -12,21 +12,22 @@ import { take } from 'rxjs';
 })
 export class RecipePageComponent implements OnInit {
     public isEdit: boolean = false;
-    private recipe: IRecipe | null = null;
+    public recipe: IRecipe | null = null;
 
     public ingredients: FormArray = new FormArray<FormControl>([
         new FormControl<string>('', Validators.required)
     ]);
     
     public formGroup: FormGroup = new FormGroup({
-        title: new FormControl( Validators.required),
-        description: new FormControl(Validators.required),
+        title: new FormControl("", Validators.required),
+        description: new FormControl("", Validators.required),
         ingredient: this.ingredients
     });
         
     constructor(
         private activatedRoute: ActivatedRoute,
-        private recipeService: RecipeService
+        private recipeService: RecipeService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -39,8 +40,16 @@ export class RecipePageComponent implements OnInit {
                     if (recipe)
                     {
                         this.isEdit = true;
+                        this.recipe = recipe;
                         this.writeToFormGroup(recipe);
                     }
+                    // this.recipe = {
+                    //     title: "",
+                    //     createAt: new Date(),
+                    //     description: "",
+                    //     favourite: false,
+                    //     ingredient: []
+                    // };
                 }
             );
     }
@@ -59,8 +68,21 @@ export class RecipePageComponent implements OnInit {
 
     public onSubmit(event: Event)
     {
-        console.error("SUBMIT");
         event.preventDefault();
+        
+        if (this.formGroup.valid)
+        {
+            if (this.isEdit)
+            {
+                this.recipeService.update({ ...this.recipe, ...this.formGroup.value });
+            }
+            else
+            {
+                this.recipeService.add({ ...this.recipe, ...this.formGroup.value, createAt: new Date() });
+            }
+
+            this.router.navigateByUrl("/");
+        }
     }
 
     private writeToFormGroup(recipe: IRecipe): void
@@ -74,7 +96,7 @@ export class RecipePageComponent implements OnInit {
                     if (entry[0] == "ingredient")
                     {
                         for (let index = 0; index < recipe.ingredient.length; index++) {                            
-                            let ingredient = recipe.ingredient[index];
+                            let ingredient = recipe?.ingredient[index];
                             let ingredientControl = this.ingredients.controls[index];
 
                             if (this.ingredients.length < recipe.ingredient.length)
