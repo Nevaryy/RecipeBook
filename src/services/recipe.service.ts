@@ -10,19 +10,24 @@ export class RecipeService {
     
     private recipes: IRecipe[] = [
         {
-            id: v4(),
+            id: "1",
             createAt: new Date(),
             description: "Dummy Description 1",
             favourite: false,
-            ingredient: [],
+            ingredient: [
+                "Tomatoe",
+                "Salat",
+            ],
             title: "Dummy Recipe 1"
         },
         {
-            id: v4(),
+            id: "2",
             createAt: new Date(),
             description: "Dummy Description 2",
             favourite: true,
-            ingredient: [],
+            ingredient: [
+                "Beef"
+            ],
             title: "Dummy Recipe 2"
         }
     ];

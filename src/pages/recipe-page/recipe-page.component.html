@@ -1,0 +1,49 @@
+<div fxLayout="column">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ (this.isEdit) ? "Bearbeiten" : "Erstellen" }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form fxLayout="column" fxLayoutGap="16px" (ngSubmit)="this.onSubmit($event)" [formGroup]="this.formGroup">
+                <mat-form-field appearance="fill">
+                    <mat-label>Titel</mat-label>
+                    <input matInput formControlName="title">
+                </mat-form-field>
+    
+                <!-- Ingredient list -->
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <h2>Zutaten</h2>
+                    <button type="button" mat-icon-button (click)="this.addIngedrient()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <mat-list fxLayoutGap="32px">
+                    <mat-list-item *ngFor="let control of this.ingredients.controls; index as index" formArrayName="ingredient">
+                        <mat-form-field>
+                            <mat-label>Bezeichnung</mat-label>
+                            <input matInput [formControlName]="index">
+                        </mat-form-field>
+                        <button type="button" mat-icon-button (click)="this.removeIngredient(index)">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+                <!-- end of list -->
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Beschreibung</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <button type="button" mat-icon-button routerLink="/" color="warn">
+                        Abbrechen
+                    </button>
+                    <button mat-raised-button type="submit" color="primary">
+                        {{ (this.isEdit) ? "Speichern" : "Hinzufügen" }}
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,24 +1,24 @@
-import { DetailComponent } from '../pages/detail/detail.component';
+import { HomePageComponent } from './../pages/home-page/home-page.component';
+import { DetailPageComponent } from './../pages/detail-page/detail-page.component';
+import { RecipePageComponent } from './../pages/recipe-page/recipe-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from '../pages/home/home.component';
-import { RecipeComponent } from '../pages/recipe/recipe.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        component: HomePageComponent
     },
     {
         path: ':recipeId',
         children: [
             {
                 path: "edit",
-                component: RecipeComponent
+                component: RecipePageComponent
             },
             {
                 path: "details",
-                component: DetailComponent
+                component: DetailPageComponent
             }
         ]
     },
