@@ -46,7 +46,7 @@ export class RecipeService {
     
     public add(recipe: IRecipe): void
     {
-        this.recipes.push(recipe);
+        this.recipes.push({ ...recipe, id: v4() });
     }
     
     public remove(recipe: IRecipe): void

@@ -1,7 +1,6 @@
 import { IRecipe } from './../../models/recipe.interface';
 import { RecipeService } from './../../services/recipe.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-recipe-card',
@@ -14,8 +13,7 @@ export class RecipeCardComponent implements OnInit {
     public recipe: IRecipe | null = null;
     
     constructor(
-        public recipeService: RecipeService,
-        public router: Router
+        public recipeService: RecipeService
     ) { }
         
         ngOnInit(): void {
